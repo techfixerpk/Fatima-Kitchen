@@ -1,164 +1,74 @@
 {
-  "name": "fatimas-kitchen-pro",
-  "version": "2.0.0",
+  "name": "fatimas-kitchen-enterprise-v2",
+  "version": "2.0.26",
   "private": true,
-  "description": "Enterprise-grade Food Delivery System - Foodpanda Killer Edition",
-  "author": "Fatima Kitchen",
+  "author": "Fatima's Kitchen Global",
+  "description": "A High-Performance, SEO-Optimized Luxury Food Portal with Real-time Inventory and Multi-branch Support.",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  }
-}
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "framer-motion": "^10.16.4",
-    "lucide-react": "^0.284.0",
-    "react-router-dom": "^6.16.0",
-    "@reduxjs/toolkit": "^1.9.7",
-    "react-redux": "^8.1.3",
-    "axios": "^1.5.1",
-    "styled-components": "^6.1.0",
-    "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1",
-    "react-hot-toast": "^2.4.1",
-    "clsx": "^2.0.0",
-    "tailwind-merge": "^1.14.0"
+    "react-router-dom": "^6.22.0",
+    
+    "/* -- UI & LUXURY DESIGN -- */": "v1",
+    "framer-motion": "^11.0.8",
+    "styled-components": "^6.1.8",
+    "lucide-react": "^0.344.0",
+    "react-icons": "^5.0.1",
+    "swiper": "^11.0.7",
+    "canvas-confetti": "^1.9.2",
+    "react-reveal": "^1.2.2",
+    
+    "/* -- STATE & DATA MANAGEMENT -- */": "v1",
+    "@reduxjs/toolkit": "^2.2.1",
+    "react-redux": "^9.1.0",
+    "axios": "^1.6.7",
+    "react-query": "^3.39.3",
+    "lodash": "^4.17.21",
+    
+    "/* -- UTILITIES & ANIMATION -- */": "v1",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.1",
+    "react-scroll": "^1.9.0",
+    "react-fast-marquee": "^1.6.4",
+    
+    "/* -- FORMS & VALIDATION -- */": "v1",
+    "formik": "^2.4.5",
+    "yup": "^1.4.0",
+    "react-toastify": "^10.0.4",
+    "sweetalert2": "^11.10.5",
+    
+    "/* -- PERFORMANCE & ANALYTICS -- */": "v1",
+    "web-vitals": "^3.5.2",
+    "react-intersection-observer": "^9.8.1",
+    "nprogress": "^0.2.0"
   },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "gh-pages": "^6.0.0",
-    "tailwindcss": "^3.3.3",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31",
-    "eslint": "^8.52.0",
-    "prettier": "^3.0.3"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "scripts": {
+    "dev": "react-scripts start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,css,md}\"",
+    "clean": "rm -rf build node_modules",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "production": "npm run build && serve -s build"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "homepage": "https://github.com/YourGitHubUsername/fatimas-kitchen-pro",
-  "keywords": [
-    "food-delivery",
-    "real-time-tracking",
-    "professional-kitchen",
-    "ecommerce-food",
-    "fast-checkout"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "clean": "rimraf build node_modules/.cache",
-    "lint": "eslint src/**/*.js",
-    "format": "prettier --write \"src/**/*.{js,jsx,css}\""
-  },
-  "dependencies": {
-    ... (pechli dependencies),
-    "framer-motion": "^10.16.4",
-    "react-intersection-observer": "^9.5.2",
-    "react-reveal": "^1.2.2",
-    "canvas-confetti": "^1.6.0"
-  },
-  "dependencies": {
-    ... (pechli dependencies),
-    "dotenv": "^16.3.1",
-    "jose": "^4.14.4",
-    "react-secure-storage": "^1.3.0"
-  },
-  "resolutions": {
-    "cross-spawn": "^7.0.5"
-  },
-  "dependencies": {
-    ... (pechli dependencies),
-    "file-loader": "^6.2.0",
-    "url-loader": "^4.1.1",
-    "image-minimizer-webpack-plugin": "^3.12.0",
-    "react-lazy-load-image-component": "^1.6.0"
-  },
-{
-  "name": "fatimas-kitchen-pro",
-  "version": "2.0.0",
-  "private": true,
-  "description": "Enterprise-grade Food Delivery System - Foodpanda Killer Edition",
-  "author": "Fatima Kitchen",
-  "homepage": "https://github.com/YourGitHubUsername/fatimas-kitchen-pro",
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "framer-motion": "^10.16.4",
-    "lucide-react": "^0.284.0",
-    "react-router-dom": "^6.16.0",
-    "@reduxjs/toolkit": "^1.9.7",
-    "react-redux": "^8.1.3",
-    "axios": "^1.5.1",
-    "styled-components": "^6.1.0",
-    "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1",
-    "react-hot-toast": "^2.4.1",
-    "clsx": "^2.0.0",
-    "tailwind-merge": "^1.14.0",
-    "react-intersection-observer": "^9.5.2",
-    "react-reveal": "^1.2.2",
-    "canvas-confetti": "^1.6.0",
-    "dotenv": "^16.3.1",
-    "jose": "^4.14.4",
-    "react-secure-storage": "^1.3.0",
-    "react-lazy-load-image-component": "^1.6.0"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "gh-pages": "^6.0.0",
-    "tailwindcss": "^3.3.3",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31",
-    "eslint": "^8.52.0",
-    "prettier": "^3.0.3",
-    "image-minimizer-webpack-plugin": "^3.12.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "clean": "rimraf build node_modules/.cache",
-    "lint": "eslint src/**/*.js",
-    "format": "prettier --write \"src/**/*.{js,jsx,css}\""
+    ],
+    "rules": {
+      "no-console": "warn",
+      "no-unused-vars": "error",
+      "react/prop-types": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -172,11 +82,19 @@
       "last 1 safari version"
     ]
   },
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "prettier": "^3.2.5",
+    "eslint-plugin-react": "^7.33.2",
+    "source-map-explorer": "^2.5.3",
+    "serve": "^14.2.1"
+  },
   "keywords": [
-    "food-delivery",
-    "real-time-tracking",
-    "professional-kitchen",
-    "fast-checkout"
+    "premium-food-app",
+    "react-luxury-ui",
+    "gold-theme-ecommerce",
+    "fatimas-kitchen-tech-stack",
+    "high-conversion-landing-page"
   ],
-  "license": "MIT"
-  }
+  "homepage": "https://fatimaskitchen.com"
+}
