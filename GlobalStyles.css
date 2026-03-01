@@ -1,0 +1,409 @@
+/* GLOBAL STYLES - STEP 1
+  Linking ThemeEngine Logic to CSS Root
+*/
+
+:root {
+  /* Branding Colors */
+  --primary-gold: #D4AF37;
+  --deep-black: #1A1A1A;
+  --royal-white: #FFFFFF;
+  --soft-gray: #F9F9F9;
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Animation Speeds */
+  --transition-fast: 0.2s ease-in-out;
+  --transition-standard: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Reset - To remove ugly browser defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* Screen se bahar kuch nahi jayega */
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--soft-gray);
+  color: var(--deep-black);
+  line-height: 1.6;
+}
+/* GLOBAL STYLES - STEP 2
+   Typography Engine & Font Integration
+*/
+
+/* Importing Premium Fonts from Google */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700&display=swap');
+
+/* Heading Styles - The 'Heavy' Look */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--deep-black);
+  font-weight: 700;
+  letter-spacing: -0.5px; /* Premium compact look */
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3.5rem; /* Massive title for Hero section */
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 2.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+/* Custom Gold Underline for Sections */
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background-color: var(--primary-gold);
+  border-radius: var(--transition-fast);
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+/* GLOBAL STYLES - STEP 3
+   Animation Keyframes & Global Entry Effects
+*/
+
+/* 1. The "Rise & Shine" Effect */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. The "Gold Glow" Pulse (For Special Offers) */
+@keyframes goldPulse {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+/* Applying Global Classes */
+.reveal {
+  animation: fadeInUp var(--transition-standard) forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+.premium-pulse {
+  animation: goldPulse 2s infinite;
+  border-radius: 50px;
+}
+
+/* Smooth Image Hover - Professional Zoom */
+.food-card-img {
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.food-card-img:hover {
+  transform: scale(1.1);
+}
+/* GLOBAL STYLES - STEP 4
+   Luxury Button System & Form Inputs
+*/
+
+/* 1. The Signature Gold Button (Primary) */
+.btn-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+  color: var(--royal-white);
+  padding: 14px 28px;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+  filter: brightness(1.1);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+  scale: 0.96; /* Physical press feel */
+}
+
+/* 2. The Ghost Button (Secondary) */
+.btn-outline {
+  background: transparent;
+  color: var(--deep-black);
+  border: 2px solid var(--deep-black);
+  padding: 12px 26px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+.btn-outline:hover {
+  background: var(--deep-black);
+  color: var(--royal-white);
+}
+
+/* 3. Luxury Input Fields */
+.input-field {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  transition: var(--transition-fast);
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: var(--primary-gold);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+/* GLOBAL STYLES - STEP 5
+   Luxury Containers & Food Card Architecture
+*/
+
+/* 1. The Main Content Wrapper */
+.container {
+  max-width: var(--container-width, 1200px);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 2. The Glassmorphic Card (Foodpanda Killer) */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+  transition: var(--transition-standard);
+  overflow: hidden;
+  position: relative;
+}
+
+.glass-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary-gold);
+  box-shadow: 0 15px 45px rgba(212, 175, 55, 0.1);
+}
+
+/* 3. The "Premium Badge" (For Price or Bestsellers) */
+.badge-gold {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--primary-gold);
+  color: var(--royal-white);
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  z-index: 2;
+}
+
+/* 4. Section Spacing */
+.section-padding {
+  padding: 80px 0;
+    }
+/* GLOBAL STYLES - STEP 6
+   Responsive Grid & Dark Mode Support
+*/
+
+/* 1. The Power Grid (Standard for Food Apps) */
+.food-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  width: 100%;
+}
+
+/* 2. Responsive Breakpoints (Mobile First) */
+@media (max-width: 768px) {
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+  .section-padding { padding: 40px 0; }
+  .btn-gold { width: 100%; } /* Mobile par button full width */
+}
+
+/* 3. Dark Mode Overrides (Automatic Support) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0A0A0A; /* Deep Pitch Black */
+    color: var(--royal-white);
+  }
+
+  .glass-card {
+    background: rgba(30, 30, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  p { color: #BBB; }
+  
+  .input-field {
+    background: #1A1A1A;
+    border-color: #333;
+    color: white;
+  }
+}
+
+/* 4. Utility Classes */
+.text-gold { color: var(--primary-gold); }
+.text-center { text-align: center; }
+.mt-20 { margin-top: 20px; }
+/* GLOBAL STYLES - STEP 8
+   The Final Polish: Shimmer & Micro-Interactions
+*/
+
+/* 1. Skeleton Loading Shimmer (The "Heavy" Loading Feel) */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0.05) 25%,
+    rgba(212, 175, 55, 0.1) 50%,
+    rgba(212, 175, 55, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite linear;
+}
+
+@keyframes loading-shimmer {
+  to { background-position: -200% 0; }
+}
+
+/* 2. Custom Scrollbar (Signature Look) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--deep-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gold);
+  border-radius: 10px;
+  border: 3px solid var(--deep-black); /* Creates a floating effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFD700;
+}
+
+/* 3. Text Selection Color */
+::selection {
+  background: var(--primary-gold);
+  color: var(--royal-white);
+}
+
+/* 4. Layout Wrapper for Full-Width Sections */
+.full-width-gold {
+  background: var(--primary-gold);
+  color: var(--royal-white);
+  padding: 60px 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+/* GLOBAL STYLES - STEP 9
+   Micro-Interactions & High-End Feedback
+*/
+
+/* 1. Magnetic Hover Effect for Links */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: var(--royal-white);
+  transition: var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--primary-gold);
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+  width: 100%; /* Underline grows from left to right */
+}
+
+/* 2. Luxury Tooltip (Price/Details popup) */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: var(--deep-black);
+  color: var(--primary-gold);
+  font-size: 0.8rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-standard);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+[data-tooltip]:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 3. Image Brightness Control (Premium Gallery Feel) */
+.gallery-img {
+  filter: brightness(0.9) grayscale(0.2);
+  transition: var(--transition-standard);
+}
+
+.gallery-img:hover {
+  filter: brightness(1.1) grayscale(0);
+  cursor: pointer;
+}
