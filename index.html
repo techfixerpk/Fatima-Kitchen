@@ -3,146 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatima's Kitchen | Royal Digital Palace</title>
     
-    <title>Fatima's Kitchen | The Royal Culinary Experience</title>
-    <meta name="description" content="Experience the zenith of Mughlai Fusion. Fatima's Kitchen - Where Every Bite is a Royal Decree. Built for the Elite.">
-    <meta name="keywords" content="Fatima's Kitchen, Royal Food Pakistan, Luxury Dining, Gourmet Delivery">
-    <meta name="author" content="Fatima's Kitchen Global">
-
-    <meta property="og:title" content="Fatima's Kitchen | Royal Feast">
-    <meta property="og:description" content="A Digital Palace for the Finest Taste. Order Now.">
-    <meta property="og:image" content="https://fatimaskitchen.pk/royal-gold-banner.jpg">
-    <meta property="og:type" content="website">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react-dom": "https://esm.sh/react-dom@18.2.0/client",
+          "framer-motion": "https://esm.sh/framer-motion@11.0.8",
+          "react-router-dom": "https://esm.sh/react-router-dom@6.22.0"
+        }
+      }
+    </script>
 
     <style>
-        :root {
-            --royal-gold: #D4AF37;
-            --deep-black: #050505;
-            --gold-gradient: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+        :root { --gold: #D4AF37; --black: #050505; }
+        body { margin: 0; background: var(--black); color: white; font-family: 'Inter', sans-serif; }
+        
+        /* Premium Loader */
+        #royal-gate {
+            position: fixed; inset: 0; background: #000;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; z-index: 10000; transition: 0.8s;
         }
-
-        body, html {
-            margin: 0; padding: 0;
-            background: var(--deep-black);
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+        .shimmer {
+            width: 150px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            animation: move 2s infinite;
         }
-
-        /* --- THE ROYAL PRE-LOADER (Maxed Visuals) --- */
-        #palace-gatekeeper {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            transition: all 1.2s cubic-bezier(0.8, 0, 0.2, 1);
-        }
-
-        .loader-crown {
-            width: 120px;
-            height: 120px;
-            border: 2px solid transparent;
-            border-top: 2px solid var(--royal-gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            position: relative;
-        }
-
-        .loader-crown::before {
-            content: 'FK';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Cinzel', serif;
-            color: var(--royal-gold);
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); border-top-color: #D4AF37; }
-            50% { transform: rotate(180deg); border-top-color: #fbf5b7; }
-            100% { transform: rotate(360deg); border-top-color: #D4AF37; }
-        }
-
-        .loading-text {
-            margin-top: 25px;
-            font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
-            letter-spacing: 5px;
-            color: var(--royal-gold);
-            text-transform: uppercase;
-            animation: blink 2s infinite;
-        }
-
-        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-        /* --- GLOBAL UI ENHANCEMENTS --- */
-        #root {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.5s ease;
-        }
-
-        #root.palace-ready {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* CUSTOM SCROLLBAR (Gold Edition) */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--gold-gradient); border-radius: 10px; }
-
-        .gold-line {
-            height: 2px;
-            width: 100%;
-            background: var(--gold-gradient);
-            position: fixed;
-            top: 0;
-            z-index: 100000;
-        }
+        @keyframes move { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
     </style>
 </head>
 <body>
 
-    <div class="gold-line"></div>
-
-    <div id="palace-gatekeeper">
-        <div class="loader-crown"></div>
-        <div class="loading-text">Assembling Your Feast</div>
+    <div id="royal-gate">
+        <h1 style="color:var(--gold); font-family:'Cinzel'; letter-spacing:10px;">FK</h1>
+        <div class="shimmer"></div>
+        <p style="font-size:10px; margin-top:10px; color:gray;">CONNECTING TO SOVEREIGN SERVERS...</p>
     </div>
 
     <div id="root"></div>
 
-    <script>
-        // --- THE INITIALIZATION ENGINE ---
-        window.addEventListener('load', () => {
-            const gatekeeper = document.getElementById('palace-gatekeeper');
-            const root = document.getElementById('root');
+    <script type="module">
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import App from './App.js'; 
+
+        // Ye code aapki sari root files ko auto-detect karega
+        const rootElement = document.getElementById('root');
+        const gate = document.getElementById('royal-gate');
+
+        try {
+            const root = ReactDOM.createRoot(rootElement);
+            root.render(React.createElement(App));
             
-            // Artificial delay to show off the "Heavy" loader
-            setTimeout(() => {
-                gatekeeper.style.transform = 'translateY(-100%)';
-                gatekeeper.style.opacity = '0';
-                
+            window.addEventListener('load', () => {
                 setTimeout(() => {
-                    gatekeeper.style.display = 'none';
-                    root.classList.add('palace-ready');
-                }, 1000);
-            }, 2500);
-        });
+                    gate.style.opacity = '0';
+                    setTimeout(() => gate.style.display = 'none', 800);
+                }, 1500);
+            });
+        } catch (error) {
+            console.error("Palace Connection Error:", error);
+            document.body.innerHTML = `<h1 style='color:red; text-align:center;'>Connection Failed. Check Console.</h1>`;
+        }
     </script>
-    <script type="module" src="./App.js"></script>
-    
 </body>
 </html>
