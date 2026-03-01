@@ -1,156 +1,192 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import AppConfig from '../config/AppConfig';
 import ThemeEngine from '../theme/ThemeEngine';
 
-const Navbar = () => {
-  // State to track if user has scrolled
-  const [isScrolled, setIsScrolled] = useState(false);
+/**
+ * NAVBAR COMPONENT - THE ROYAL GATEWAY
+ * Features: Adaptive Glassmorphism, Shrinking Header, Mobile Sidebar, and Active State Tracking.
+ */
 
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState('home');
+
+  const { brand, contact } = AppConfig;
+  const { colors, motion: themeMotion, glass } = ThemeEngine;
+
+  // 1. SCROLL LISTENER - Handles the "Shrinking" and "Blur" Effect
   useEffect(() => {
     const handleScroll = () => {
-      // Agar 50px se zyada scroll kiya toh true
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const { brand, contact } = AppConfig;
-  const { colors, layers } = ThemeEngine;
-
-  // Dynamic Styles based on scroll state
-  const navStyles = {
+  // 2. STYLES DEFINITION (Maxed Out Inline Logic)
+  const navContainerStyles = {
     position: 'fixed',
     top: 0,
+    left: 0,
     width: '100%',
-    zIndex: layers.navbar,
-    height: isScrolled ? '70px' : '90px', // Shrinks on scroll
-    backgroundColor: isScrolled ? 'rgba(26, 26, 26, 0.95)' : 'transparent',
-    backdropFilter: isScrolled ? 'blur(10px)' : 'none',
-    borderBottom: isScrolled ? `1px solid ${colors.light.primary}` : 'none',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    zIndex: 1000,
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '0 8%',
+    flexDirection: 'column',
+    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
   };
 
-  return (
-    <nav style={navStyles} className="navbar-assembly">
-      {/* Brand Side */}
-      <div className="nav-brand">
-        <h1 style={{ 
-          color: colors.light.primary, 
-          fontSize: isScrolled ? '1.5rem' : '1.8rem',
-          transition: '0.4s'
-        }}>
-          {brand.name.toUpperCase()}
-        </h1>
-      </div>
+  const mainNavStyles = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: isScrolled ? '15px 8%' : '25px 8%',
+    backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent',
+    backdropFilter: isScrolled ? glass.backdropFilter : 'none',
+    borderBottom: isScrolled ? `1px solid ${colors.primary.goldDark}` : 'none',
+    transition: 'inherit',
+  };
 
-      {/* Action Side */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        <a href="#menu" className="nav-link">Menu</a>
-        <a href={contact.whatsappLink} className="btn-gold" style={{ padding: '10px 20px' }}>
-          ORDER NOW
-        </a>
-      </div>
-    </nav>
+  const linkStyle = (id) => ({
+    color: activeLink === id ? colors.primary.gold : colors.neutral.pureWhite,
+    textDecoration: 'none',
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    letterSpacing: '1.5px',
+    transition: '0.3s',
+    cursor: 'pointer',
+    position: 'relative'
+  });
+
+  const menuItems = [
+    { name: 'HOME', id: 'home', link: '#' },
+    { name: 'MENU', id: 'menu', link: '#menu' },
+    { name: 'SPECIALS', id: 'specials', link: '#specials' },
+    { name: 'STORY', id: 'story', link: '#story' }
+  ];
+
+  return (
+    <>
+      <nav style={navContainerStyles}>
+        {/* --- TOP ANNOUNCEMENT BAR --- */}
+        {!isScrolled && (
+          <div style={{
+            backgroundColor: colors.primary.gold,
+            color: '#000',
+            textAlign: 'center',
+            fontSize: '0.75rem',
+            fontWeight: 'bold',
+            padding: '8px 0',
+            letterSpacing: '2px'
+          }}>
+            ✨ FREE DELIVERY ON YOUR FIRST ROYAL ORDER! ✨
+          </div>
+        )}
+
+        {/* --- MAIN NAVIGATION BAR --- */}
+        <div style={mainNavStyles}>
+          {/* Brand Identity */}
+          <div className="nav-brand" style={{ cursor: 'pointer' }}>
+            <h1 style={{ 
+              color: colors.primary.gold, 
+              fontFamily: ThemeEngine.typography.fonts.heading,
+              fontSize: isScrolled ? '1.5rem' : '1.8rem',
+              margin: 0,
+              transition: '0.4s'
+            }}>
+              {brand.name.toUpperCase()}
+            </h1>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="desktop-nav" style={{ display: 'flex', gap: '40px', alignItems: 'center' }}>
+            {menuItems.map((item) => (
+              <a 
+                key={item.id}
+                href={item.link}
+                className="nav-link-hover"
+                style={linkStyle(item.id)}
+                onClick={() => setActiveLink(item.id)}
+              >
+                {item.name}
+              </a>
+            ))}
+
+            <a href={contact.whatsappLink} className="btn-gold" style={{ 
+              padding: '10px 25px', 
+              fontSize: '0.8rem',
+              borderRadius: '0' 
+            }}>
+              ORDER NOW
+            </a>
+          </div>
+
+          {/* Hamburger Icon (Mobile Only) */}
+          <div 
+            className="mobile-hamburger" 
+            onClick={() => setIsMobileOpen(true)}
+            style={{ display: 'none', cursor: 'pointer' }} // Control via CSS media query
+          >
+            <div style={{ width: '25px', height: '2px', background: colors.primary.gold, marginBottom: '6px' }} />
+            <div style={{ width: '20px', height: '2px', background: colors.primary.gold, marginBottom: '6px' }} />
+            <div style={{ width: '25px', height: '2px', background: colors.primary.gold }} />
+          </div>
+        </div>
+      </nav>
+
+      {/* --- MOBILE SIDEBAR OVERLAY --- */}
+      <AnimatePresence>
+        {isMobileOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileOpen(false)}
+              style={{
+                position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+                background: 'rgba(0,0,0,0.8)', zIndex: 1100, backdropFilter: 'blur(5px)'
+              }}
+            />
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              style={{
+                position: 'fixed', top: 0, right: 0, width: '80%', height: '100vh',
+                background: colors.neutral.royalBlack, zIndex: 1200, padding: '50px 40px',
+                borderLeft: `2px solid ${colors.primary.gold}`
+              }}
+            >
+              <div onClick={() => setIsMobileOpen(false)} style={{ color: colors.primary.gold, fontSize: '2rem', textAlign: 'right', cursor: 'pointer' }}>×</div>
+              <div style={{ marginTop: '50px', display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                {menuItems.map((item) => (
+                  <a 
+                    key={item.id} 
+                    href={item.link} 
+                    onClick={() => setIsMobileOpen(false)}
+                    style={{ ...linkStyle(item.id), fontSize: '1.5rem' }}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+                <hr style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }} />
+                <p style={{ color: colors.primary.gold, fontSize: '0.8rem' }}>CONNECT WITH US</p>
+                <div style={{ display: 'flex', gap: '20px' }}>
+                  <span style={{ color: '#fff' }}>FB</span>
+                  <span style={{ color: '#fff' }}>IG</span>
+                  <span style={{ color: '#fff' }}>WA</span>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
 export default Navbar;
-  // --- STEP 2: Mobile Logic & Sidebar Styles ---
-  const [isOpen, setIsOpen] = useState(false); // Menyuni ochish/yopish holati
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const sidebarStyle = {
-    position: 'fixed',
-    top: 0,
-    right: isOpen ? '0' : '-100%', // Agar ochiq bo'lsa ko'rinadi, yopiq bo'lsa ekrandan chiqib ketadi
-    width: '280px',
-    height: '100vh',
-    backgroundColor: '#1A1A1A', // Royal Black background
-    zIndex: layers.sidebar,
-    transition: '0.6s cubic-bezier(0.8, 0, 0.2, 1)', // Smooth slide effect
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '40px 20px',
-    boxShadow: effects.shadows.premium,
-    borderLeft: `2px solid ${colors.light.primary}` // Oltin rangli chegara
-  };
-
-  const menuLinkStyle = {
-    color: '#FFFFFF',
-    fontSize: '1.2rem',
-    textDecoration: 'none',
-    marginBottom: '25px',
-    fontFamily: "'Playfair Display', serif",
-    letterSpacing: '1px'
-  };
-
-  // ----------------------------------------------
-            // --- STEP 3: Announcement Bar Logic ---
-  const announcementStyle = {
-    width: '100%',
-    backgroundColor: colors.light.primary, // Gold
-    color: '#000', // Black text for contrast
-    padding: '8px 0',
-    fontSize: '0.85rem',
-    fontWeight: '700',
-    textAlign: 'center',
-    letterSpacing: '1.5px',
-    textTransform: 'uppercase',
-    display: isScrolled ? 'none' : 'block', // Scroll karte hi gayab ho jaye ga
-    transition: '0.3s ease-in-out',
-    fontFamily: 'var(--font-body)'
-  };
-  // --- STEP 4: Interactive Link Logic ---
-  const [activeLink, setActiveLink] = useState('home');
-
-  const navLinks = [
-    { name: 'HOME', id: 'home', link: '#' },
-    { name: 'OUR MENU', id: 'menu', link: '#menu' },
-    { name: 'DEALS', id: 'deals', link: '#deals' },
-    { name: 'CONTACT', id: 'contact', link: '#contact' }
-  ];
-
-  const getLinkStyle = (id) => ({
-    color: activeLink === id ? colors.light.primary : '#FFFFFF',
-    textDecoration: 'none',
-    fontSize: '0.85rem',
-    fontWeight: '600',
-    letterSpacing: '1px',
-    transition: '0.3s',
-    position: 'relative',
-    padding: '5px 0'
-  });
-  // --- STEP 5: Social Media Logic ---
-  const socialIconsStyle = {
-    display: 'flex',
-    gap: '20px',
-    marginTop: 'auto', // Isay sidebar ke bilkul niche push kar dega
-    paddingTop: '30px',
-    borderTop: `1px solid rgba(212, 175, 55, 0.2)`
-  };
-
-  const iconStyle = {
-    color: colors.light.primary,
-    fontSize: '1.2rem',
-    transition: '0.3s',
-    cursor: 'pointer'
-  };
-
-  // Inhe Sidebar Drawer ke div ke andar bilkul niche rakhein:
-  
-    <div style={sidebarStyle}>
-       ... (Step 2 links) ...
-       
-       <div style={socialIconsStyle}>
-          <a href="#" style={iconStyle}>FB</a>
-          <a href="#" style={iconStyle}>IG</a>
-          <a href="#" style={iconStyle}>WA</a>
-       </div>
-    </div>
-  
+            
