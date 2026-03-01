@@ -15,7 +15,8 @@ import OrderTracking from './OrderTracking';
 import WhatsAppEngine from './WhatsAppEngine';
 import GlobalStyles from './GlobalStyles';
 import ThemeEngine from './ThemeEngine';
-
+"homepage": "https://techfixerpk.github.io/Fatima-Kitchen",
+  
 // --- PRE-RENDERED QUANTUM LOADER ---
 const QuantumLoader = () => (
   <motion.div 
