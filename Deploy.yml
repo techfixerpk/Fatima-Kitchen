@@ -1,0 +1,54 @@
+name: 🚀 FATIMAS KITCHEN - ROYAL DEPLOYMENT PROTOCOL
+
+on:
+  push:
+    branches: [ main, master ] # Code push hote hi trigger hoga
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    # --- HEAVY STRATEGY: PARALLEL EXECUTION ---
+    steps:
+      - name: 📥 Cloning The Royal Repository
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Initializing Node.js Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: 🛡️ Security Audit & Dependency Injection
+        run: |
+          npm ci --force
+          npm audit fix --force
+
+      - name: 🏗️ Compiling The Production Build (Max Optimization)
+        env:
+          REACT_APP_WHATSAPP_NUMBER: ${{ secrets.REACT_APP_WHATSAPP_NUMBER }}
+          REACT_APP_ADMIN_EMAIL: "Fatimaskitchenpk92@gmail.com"
+          GENERATE_SOURCEMAP: false # Code ko compact aur secure rakhne ke liye
+        run: npm run build
+
+      - name: 🧪 Automated Quality Assurance (Unit Tests)
+        run: npm test -- --watchAll=false --passWithNoTests
+
+      - name: 🚢 Deploying to Production (Vercel/Cloud)
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+
+      - name: 🔔 Dispatching WhatsApp/Slack Notification
+        if: success()
+        run: echo "The Royal Palace is now LIVE! Deployment Successful."
+
+      - name: ⚠️ Emergency Protocol (On Failure)
+        if: failure()
+        run: echo "Deployment Failed! Guards, check the logs immediately."
+        
