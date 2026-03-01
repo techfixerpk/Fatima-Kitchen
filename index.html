@@ -4,97 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Fatima's Kitchen | The Royal Taste of Pakistan</title>
-    <meta name="description" content="Premium Mughlai & Fusion cuisine delivered from the heart of Pakistan. Experience luxury.">
-    <meta name="theme-color" content="#050505">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
-    
+    <title>Fatima's Kitchen | The Royal Culinary Experience</title>
+    <meta name="description" content="Experience the zenith of Mughlai Fusion. Fatima's Kitchen - Where Every Bite is a Royal Decree. Built for the Elite.">
+    <meta name="keywords" content="Fatima's Kitchen, Royal Food Pakistan, Luxury Dining, Gourmet Delivery">
+    <meta name="author" content="Fatima's Kitchen Global">
+
+    <meta property="og:title" content="Fatima's Kitchen | Royal Feast">
+    <meta property="og:description" content="A Digital Palace for the Finest Taste. Order Now.">
+    <meta property="og:image" content="https://fatimaskitchen.pk/royal-gold-banner.jpg">
+    <meta property="og:type" content="website">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --gold: #D4AF37;
-            --black: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
+            --royal-gold: #D4AF37;
+            --deep-black: #050505;
+            --gold-gradient: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--black);
-            color: #FFF;
+            margin: 0; padding: 0;
+            background: var(--deep-black);
+            color: #ffffff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* ROYAL LOADER */
-        #royal-loader {
+        /* --- THE ROYAL PRE-LOADER (Maxed Visuals) --- */
+        #palace-gatekeeper {
             position: fixed;
             inset: 0;
-            background: #000;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 99999;
-            transition: opacity 1s ease;
+            transition: all 1.2s cubic-bezier(0.8, 0, 0.2, 1);
         }
 
-        .gold-pulse {
-            width: 100px;
-            height: 100px;
-            border: 2px solid var(--gold);
+        .loader-crown {
+            width: 120px;
+            height: 120px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--royal-gold);
             border-radius: 50%;
-            animation: pulse 2s infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            animation: spin 1s linear infinite;
+            position: relative;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-            70% { transform: scale(1.1); opacity: 0.5; box-shadow: 0 0 30px 10px rgba(212, 175, 55, 0); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        #root { opacity: 0; transition: opacity 1s ease-in; }
-        #root.loaded { opacity: 1; }
-
-        /* LOGO STYLING */
-        .palace-logo {
+        .loader-crown::before {
+            content: 'FK';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
             font-family: 'Cinzel', serif;
-            color: var(--gold);
-            font-size: 1.5rem;
-            font-weight: bold;
+            color: var(--royal-gold);
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); border-top-color: #D4AF37; }
+            50% { transform: rotate(180deg); border-top-color: #fbf5b7; }
+            100% { transform: rotate(360deg); border-top-color: #D4AF37; }
+        }
+
+        .loading-text {
+            margin-top: 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
             letter-spacing: 5px;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            color: var(--royal-gold);
+            text-transform: uppercase;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        /* --- GLOBAL UI ENHANCEMENTS --- */
+        #root {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.5s ease;
+        }
+
+        #root.palace-ready {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CUSTOM SCROLLBAR (Gold Edition) */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-gradient); border-radius: 10px; }
+
+        .gold-line {
+            height: 2px;
+            width: 100%;
+            background: var(--gold-gradient);
+            position: fixed;
+            top: 0;
+            z-index: 100000;
         }
     </style>
 </head>
 <body>
 
-    <div id="royal-loader">
-        <div class="gold-pulse">
-            <span class="palace-logo">FK</span>
-        </div>
-        <p style="margin-top: 20px; color: var(--gold); letter-spacing: 2px; font-size: 0.7rem;">INITIALIZING PALACE ASSETS...</p>
+    <div class="gold-line"></div>
+
+    <div id="palace-gatekeeper">
+        <div class="loader-crown"></div>
+        <div class="loading-text">Assembling Your Feast</div>
     </div>
 
     <div id="root"></div>
 
     <script>
+        // --- THE INITIALIZATION ENGINE ---
         window.addEventListener('load', () => {
-            const loader = document.getElementById('royal-loader');
+            const gatekeeper = document.getElementById('palace-gatekeeper');
             const root = document.getElementById('root');
             
+            // Artificial delay to show off the "Heavy" loader
             setTimeout(() => {
-                loader.style.opacity = '0';
+                gatekeeper.style.transform = 'translateY(-100%)';
+                gatekeeper.style.opacity = '0';
+                
                 setTimeout(() => {
-                    loader.style.display = 'none';
-                    root.classList.add('loaded');
+                    gatekeeper.style.display = 'none';
+                    root.classList.add('palace-ready');
                 }, 1000);
-            }, 2000);
+            }, 2500);
         });
     </script>
 </body>
 </html>
-
