@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Fatima's Kitchen | The Royal Taste of Pakistan</title>
+    <meta name="description" content="Premium Mughlai & Fusion cuisine delivered from the heart of Pakistan. Experience luxury.">
+    <meta name="theme-color" content="#050505">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--black);
+            color: #FFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ROYAL LOADER */
+        #royal-loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 1s ease;
+        }
+
+        .gold-pulse {
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { transform: scale(1.1); opacity: 0.5; box-shadow: 0 0 30px 10px rgba(212, 175, 55, 0); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        #root { opacity: 0; transition: opacity 1s ease-in; }
+        #root.loaded { opacity: 1; }
+
+        /* LOGO STYLING */
+        .palace-logo {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="royal-loader">
+        <div class="gold-pulse">
+            <span class="palace-logo">FK</span>
+        </div>
+        <p style="margin-top: 20px; color: var(--gold); letter-spacing: 2px; font-size: 0.7rem;">INITIALIZING PALACE ASSETS...</p>
+    </div>
+
+    <div id="root"></div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('royal-loader');
+            const root = document.getElementById('root');
+            
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    root.classList.add('loaded');
+                }, 1000);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
+
